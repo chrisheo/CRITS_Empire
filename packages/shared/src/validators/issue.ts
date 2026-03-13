@@ -27,7 +27,7 @@ export const issueAssigneeAdapterOverridesSchema = z
   })
   .strict();
 
-export const createIssueSchema = z.object({
+const issueMutationFields = {
   projectId: z.string().uuid().optional().nullable(),
   goalId: z.string().uuid().optional().nullable(),
   parentId: z.string().uuid().optional().nullable(),
@@ -42,7 +42,9 @@ export const createIssueSchema = z.object({
   assigneeAdapterOverrides: issueAssigneeAdapterOverridesSchema.optional().nullable(),
   executionWorkspaceSettings: issueExecutionWorkspaceSettingsSchema.optional().nullable(),
   labelIds: z.array(z.string().uuid()).optional(),
-});
+} as const;
+
+export const createIssueSchema = z.object(issueMutationFields);
 
 export type CreateIssue = z.infer<typeof createIssueSchema>;
 
@@ -53,7 +55,7 @@ export const createIssueLabelSchema = z.object({
 
 export type CreateIssueLabel = z.infer<typeof createIssueLabelSchema>;
 
-export const updateIssueSchema = createIssueSchema.partial().extend({
+export const updateIssueSchema = z.object(issueMutationFields).partial().extend({
   comment: z.string().min(1).optional(),
   hiddenAt: z.string().datetime().nullable().optional(),
 });
