@@ -75,4 +75,8 @@ export const queryKeys = {
   liveRuns: (companyId: string) => ["live-runs", companyId] as const,
   runIssues: (runId: string) => ["run-issues", runId] as const,
   org: (companyId: string) => ["org", companyId] as const,
+  plans: {
+    list: ["plans"] as const,
+    detail: (planId: string) => ["plans", "detail", planId] as const,
+  },
 };
