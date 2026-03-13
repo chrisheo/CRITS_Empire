@@ -6,7 +6,8 @@ import { companiesApi } from "../api/companies";
 import { accessApi } from "../api/access";
 import { queryKeys } from "../lib/queryKeys";
 import { Button } from "@/components/ui/button";
-import { Settings, Check } from "lucide-react";
+import { Settings, Check, ScrollText } from "lucide-react";
+import { Link } from "@/lib/router";
 import { CompanyPatternIcon } from "../components/CompanyPatternIcon";
 import {
   Field,
@@ -211,6 +212,25 @@ export function CompanySettings() {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Field>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+          Plans
+        </div>
+        <div className="space-y-3 rounded-md border border-border px-4 py-4">
+          <p className="text-sm text-muted-foreground">
+            Browse generated plan markdown documents by date.
+          </p>
+          <div>
+            <Button asChild size="sm" variant="outline">
+              <Link to="/plans">
+                <ScrollText className="h-4 w-4" />
+                Open Plans
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
 
